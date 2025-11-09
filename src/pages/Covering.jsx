@@ -73,19 +73,24 @@ function Covering() {
 
   const location = useLocation().pathname;
 
+  console.log(location)
+
   // level0: selecting country, level1: selecting stadium, level2: showing players
   let level = [
     { heading: "Select Country" },
     { heading: "Select Stadium" },
-    { heading: "Teams" },
+    { heading: "Select Overs" },
   ];
 
   let levelIndx;
   if (location.includes("stadium")) {
     levelIndx = 1;
-  } else if (location.includes("teams")) {
+  } else if (location.includes("selectover")) {
     levelIndx = 2;
-  } else {
+  } else if (location.includes("teams")){
+    levelIndx = 3
+  }
+  else {
     levelIndx = 0;
   }
 
@@ -100,7 +105,7 @@ function Covering() {
       )}
       {state.stadium && (
         <SubHeading>
-          Venu: {state.stadium.name} - {state.stadium.country}
+          Venu: {state.stadium.name} - {state.stadium.country} Overs - {state.overs} Overs
         </SubHeading>
       )}
       {console.log(state)}
@@ -108,7 +113,7 @@ function Covering() {
         state.toss && <TossWinner>Toss Winner: {tossWinner} {state.batting && ` Batting: ${state.batting}`} </TossWinner>
       }
       <MidCover>
-        {levelIndx !== 2 && <Heading>{level[levelIndx].heading}</Heading>}
+        {levelIndx !== 3 && <Heading>{level[levelIndx].heading}</Heading>}
         <StBackground $bgimage={state?.stadium?.image}/>
         <Outlet />
       </MidCover>
@@ -119,8 +124,13 @@ function Covering() {
         </Button>
       )}
       {state.stadium && levelIndx == 1 && (
+        <Button size="midium" onClick={() => navigate("selectover")}>
+          Next - Select Overs
+        </Button>
+      )}
+      {state.overs && levelIndx == 2 && (
         <Button size="midium" onClick={() => navigate("teams")}>
-          Next - Team Players
+          Next - Toss
         </Button>
       )}
     </HomeCover>
