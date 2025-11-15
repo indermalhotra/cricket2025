@@ -39,7 +39,8 @@ export function setCrickScore(state, action, team) {
 }
 
 export function setInningsEnd(state, action){
-  return {...state, inning:action.payload.inn, batting:action.payload.team }
+  console.log("Ekumcheck", state, action)
+  return {...state, inning:action.payload.inn, batting:action.payload.team, target:action.payload.target }
 }
 
 export function ballsToOvers(balls) {

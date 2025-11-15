@@ -13,7 +13,8 @@ const initialState = {
   toss: null,
   batting: null,
   overs: null,
-  winner:null
+  winner:null,
+  target:null
 };
 
 function reducer(state, action) {

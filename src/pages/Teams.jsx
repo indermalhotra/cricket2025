@@ -41,11 +41,11 @@ const WinnerOverlay = styled.div`
   left: 0;
   top: 0;
   z-index: 999;
-  background-color: rgba(255,255,255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 const WinnerInner = styled.div`
   max-width: 70rem;
   width: 95%;
@@ -58,7 +58,7 @@ const WinnerInner = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  img{
+  img {
     max-width: 15rem;
   }
 `;
@@ -323,57 +323,52 @@ function Teams() {
 
   useEffect(() => {
     if (state[selectTeam]?.balls) {
-      if (
-        state[selectTeam].balls < state.overs * 6 &&
-        state[selectTeam].wicket < 11
-      ) {
-        console.log("EkumCheck 1")
-        console.log(state.batting);
+      let battingTeam;
+      let battingKey;
+      let ballingTeam;
+      let ballingKey;
+
+      if (state.batting === state.team1.name) {
+        battingTeam = state.team1.name;
+        battingKey = "team1";
+        ballingTeam = state.team2.name;
+        ballingKey = "team2";
       } else {
-        console.log("EkumCheck 2")
-        if (state.inning === 1) {
-          let battingTeam;
-          if (state.batting === state.team1.name) {
-            battingTeam = state.team2.name;
-          } else {
-            battingTeam = state.team1.name;
-          }
+        battingTeam = state.team2.name;
+        battingKey = "team2";
+        ballingTeam = state.team1.name;
+        ballingKey = "team1";
+      }
+      console.log("Ekumcheck team batting", battingTeam, battingKey);
+      console.log("Ekumcheck team batting", ballingTeam, ballingKey);
+
+      if (state.inning === 1) {
+        console.log("Ekumcheck Its Inning 1");
+        if (
+          state[battingKey].balls < state.overs * 6 &&
+          state[battingKey].wicket < 11
+        ) {
+          console.log("Ekumcheck Its Inning 1 Continue");
+        } else {
+          console.log("Ekumcheck Its Inning 1 End");
           dispatch({
             type: "SET_INNINGS_END",
-            payload: { inn: 2, team: battingTeam },
+            payload: {
+              inn: 2,
+              team: ballingTeam,
+              target: state[battingKey].score + 1,
+            },
           });
-        } else {
-
-          let battingTeam =
-            state.batting === state.team1.name ? "team1" : "team2";
-
-          let bowlingTeam =
-            state.batting === state.team1.name ? "team2" : "team1";
-
-          console.log("indercheck batting", state[battingTeam])
-          console.log("indercheck bowling", state[bowlingTeam])
+        }
+      } else {
+        if (state[battingKey].score < state.target) {
           if (
-            state[battingTeam].balls < state.overs * 6 &&
-            state[battingTeam].wicket < 11 && state[battingTeam].score < state[bowlingTeam].score
+            state[battingKey].balls < state.overs * 6 &&
+            state[battingKey].wicket < 11
           ) {
-
-            console.log("indertest 222 balls and wickets left");
-          } else {
-            if (!state.winner) {
-              // its second inning either wickets or ball finish
-              if (state[battingTeam].score > state[bowlingTeam].score) {
-                console.log("indertest Winner is", state[battingTeam]);
-                dispatch({ type: "SET_WINNER", payload: state[battingTeam] });
-              } else if (
-                state[battingTeam].score === state[bowlingTeam].score
-              ) {
-                console.log("indertest Match tie");
-                dispatch({ type: "SET_WINNER", payload: "Match Tie" });
-              } else {
-                console.log("indertest Winner is", state[bowlingTeam]);
-                dispatch({ type: "SET_WINNER", payload: state[bowlingTeam] });
-              }
-            }
+            console.log("All Good 2nd inning can conitinue");
+          }else{
+            dispatch({type:"SET_WINNER", payload:state[ballingKey]})
           }
         }
       }
@@ -408,12 +403,14 @@ function Teams() {
   if (state.stadium) {
     return (
       <>
-        {state.winner && <WinnerOverlay>
+        {state.winner && (
+          <WinnerOverlay>
             <WinnerInner>
               <img src={state.winner.flag} alt={state.winner.name} />
               <WinnerName>Champion is: {state.winner.name}</WinnerName>
             </WinnerInner>
-          </WinnerOverlay>}
+          </WinnerOverlay>
+        )}
         <TeamContainer>
           <TeamBox $color={state.team1.color}>
             {state.team1.players.map((player) => (
@@ -462,7 +459,7 @@ function Teams() {
             selected(Math.floor(Math.random() * 2))}
 
           {state.team1.name === state.batting ? (
-            <PlayingButtons >
+            <PlayingButtons>
               {displayScore()}
               {state.inning === 2 && targetScore()}
               <Button size="small" onClick={() => playGame("team1")}>
@@ -471,7 +468,7 @@ function Teams() {
             </PlayingButtons>
           ) : (
             state.batting && (
-              <PlayingButtons >
+              <PlayingButtons>
                 {displayScore()}
                 {state.inning === 2 && targetScore()}
                 <Button size="small" onClick={() => playGame("team2")}>
