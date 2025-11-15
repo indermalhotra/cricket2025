@@ -322,6 +322,8 @@ function Teams() {
   }
 
   useEffect(() => {
+    if (state.winner) return;
+
     if (state[selectTeam]?.balls) {
       let battingTeam;
       let battingKey;
@@ -361,15 +363,19 @@ function Teams() {
           });
         }
       } else {
-        if (state[battingKey].score < state.target) {
+        if (state[battingKey].score <= state.target) {
+          console.log("Ekumcheck 1", state.target, state[battingKey].score)
           if (
             state[battingKey].balls < state.overs * 6 &&
             state[battingKey].wicket < 11
           ) {
             console.log("All Good 2nd inning can conitinue");
-          }else{
-            dispatch({type:"SET_WINNER", payload:state[ballingKey]})
+          } else {
+            dispatch({ type: "SET_WINNER", payload: state[ballingKey] });
           }
+        } else {
+          console.log("Ekumcheck 2", state.target, state[battingKey].score)
+          dispatch({ type: "SET_WINNER", payload: state[battingKey] });
         }
       }
     }
