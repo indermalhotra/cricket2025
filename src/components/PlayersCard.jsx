@@ -26,17 +26,23 @@ const Players = styled.div`
   padding: 1rem;
   font-size: var(--smallFont);
 `;
+
 const Score = styled.div`
   font-size: 1.3rem;
   color: #000;
 `
 
+const WicketGone = styled.div`
+  font-size: 12px;
+  color: #000;
+`;
+
 function PlayersCard({ player }) {
   return (
     <PlayerWrapper>
       <img src={player.image} alt={player.name} />
-      <Players>{player.name}</Players>
-      <Score>{player.score}</Score>
+      <Players>{player.name} {player.wicket && <WicketGone>{player.wicket}</WicketGone>}</Players>
+      <Score>{player.score} {player.balls && <span>({player.balls})</span>}</Score>
     </PlayerWrapper>
   );
 }

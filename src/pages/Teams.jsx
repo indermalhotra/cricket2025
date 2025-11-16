@@ -119,7 +119,17 @@ function Teams() {
     dispatch({ type: "SET_DECIDE", payload: call });
   }
 
-  const outcomes = randomScoreArr();
+  const [battingKey, ballingTeam, ballingKey] = decideBattingBowlingTeams(state);
+  
+  let diff;
+  if(state[battingKey].wicket < 4){
+    diff = 1;
+  }else if(state[battingKey].wicket > 4 || state[battingKey].wicket < 8){
+    diff = 2;
+  }else{
+    diff = 3;
+  }
+  const outcomes = randomScoreArr(diff);
 
   function getRandomOutcome() {
     const randomIndex = Math.floor(Math.random() * outcomes.length);
@@ -138,7 +148,7 @@ function Teams() {
     }
   }
 
-  const [battingKey, ballingTeam, ballingKey] = decideBattingBowlingTeams(state);
+  
     
   useEffect(() => {
     if (state.winner) return;
