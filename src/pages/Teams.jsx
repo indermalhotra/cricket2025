@@ -114,11 +114,12 @@ function Teams() {
     }
   }
 
+const [battingKey, ballingTeam, ballingKey] = decideBattingBowlingTeams(state);
   useEffect(() => {
     if (state.winner) return;
 
     if (state[selectTeam]?.balls) {
-      const [battingKey, ballingTeam, ballingKey] = decideBattingBowlingTeams(state);
+      
 
       if (state.inning === 1) {
         console.log("Ekumcheck Its Inning 1");
@@ -126,7 +127,7 @@ function Teams() {
         
       } else {
         console.log("Ekumcheck Its Inning 2");
-        endSecondInning(state, battingKey, ballingKey, dispatch)
+        endSecondInning(state, battingKey, ballingKey, dispatch);
       }
     }
   }, [selectTeam, state, dispatch]);
@@ -179,6 +180,7 @@ function Teams() {
             ))}
           </TeamBox>
         </TeamContainer>
+        
         <div style={{ textAlign: "center" }}>
           {!state.toss && (
             <>
