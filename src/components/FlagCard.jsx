@@ -29,9 +29,9 @@ function FlagCard({ country }) {
   const {dispatch, state} = useContext(TeamContext);
 
   function handleClick() {
-    dispatch({type:"SET_TEAM1", payload: {...country, score:0, wicket:0, balls:0}});
+    dispatch({type:"SET_TEAM1", payload: {...country, score:0, wicket:0, balls:0, scorePerBall:[]}});
     const computerTeam = getComputerTeam(state.countries, country.name);
-    dispatch({type:"SET_TEAM2", payload: {...computerTeam, score:0, wicket:0, balls:0}});
+    dispatch({type:"SET_TEAM2", payload: {...computerTeam, score:0, wicket:0, balls:0, scorePerBall:[]}});
   }
 
   return (
