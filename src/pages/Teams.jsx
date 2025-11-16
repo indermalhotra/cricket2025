@@ -4,7 +4,13 @@ import TeamContext from "../context/TeamContext";
 import { useNavigate } from "react-router-dom";
 import PlayersCard from "../components/PlayersCard";
 import Button from "../components/Button";
-import { ballsToOvers, endFirstInning, decideBattingBowlingTeams, endSecondInning, randomScoreArr } from "../utils/functions";
+import {
+  ballsToOvers,
+  endFirstInning,
+  decideBattingBowlingTeams,
+  endSecondInning,
+  randomScoreArr,
+} from "../utils/functions";
 
 const TeamContainer = styled.div`
   display: flex;
@@ -45,6 +51,24 @@ const WinnerOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+const BallsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
+const BallsIndicator = styled.div`
+  width: 3rem;
+  height: 3rem;
+  background-color: maroon;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const WinnerInner = styled.div`
   max-width: 70rem;
@@ -114,23 +138,21 @@ function Teams() {
     }
   }
 
-const [battingKey, ballingTeam, ballingKey] = decideBattingBowlingTeams(state);
+  const [battingKey, ballingTeam, ballingKey] = decideBattingBowlingTeams(state);
+    
   useEffect(() => {
     if (state.winner) return;
 
     if (state[selectTeam]?.balls) {
-      
-
       if (state.inning === 1) {
         console.log("Ekumcheck Its Inning 1");
         endFirstInning(state, battingKey, ballingTeam, dispatch);
-        
       } else {
         console.log("Ekumcheck Its Inning 2");
         endSecondInning(state, battingKey, ballingKey, dispatch);
       }
     }
-  }, [selectTeam, state, dispatch]);
+  }, [selectTeam, state, dispatch, battingKey, ballingTeam, ballingKey]);
 
   const battingTeamName = state.batting;
   let scoreShow = state?.team1?.name === battingTeamName ? "team1" : "team2";
@@ -171,16 +193,22 @@ const [battingKey, ballingTeam, ballingKey] = decideBattingBowlingTeams(state);
         <TeamContainer>
           <TeamBox $color={state.team1.color}>
             {state.team1.players.map((player) => (
-              <PlayersCard player={player} key={player.id} />
+              <PlayersCard player={player} key={player.id}/>
             ))}
           </TeamBox>
           <TeamBox $color={state.team2.color}>
             {state.team2.players.map((player) => (
-              <PlayersCard player={player} key={player.id} />
+              <PlayersCard player={player} key={player.id}/>
             ))}
           </TeamBox>
         </TeamContainer>
-        
+        {state[battingKey].scorePerBall.length > 0 && (
+          <BallsContainer>
+            {state[battingKey].scorePerBall.slice(-6).map((run, indx) => (
+              <BallsIndicator key={indx}>{run}</BallsIndicator>
+            ))}
+          </BallsContainer>
+        )}
         <div style={{ textAlign: "center" }}>
           {!state.toss && (
             <>

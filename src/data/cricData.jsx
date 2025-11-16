@@ -14,7 +14,7 @@ playersIndia = [
 ]
 
 playersAustralia = [
-    {name:"Tim David", image:"https://www.wisden.com/static-assets/images/players/67402.png?v=23.77", id:"1t"},
+    {name:"Tim David", image:"https://www.wisden.com/static-assets/images/players/67402.png?v=23.77", id:"1aus"},
     {name:"Player 2", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"2aus"},
     {name:"Player 3", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"3aus"},
     {name:"Player 4", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"4aus"},
