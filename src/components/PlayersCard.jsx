@@ -37,11 +37,16 @@ const WicketGone = styled.div`
   color: #000;
 `;
 
+const FoursSixes = styled.div`
+  font-size: 12px;
+  color: #000;
+`;
+
 function PlayersCard({ player }) {
   return (
     <PlayerWrapper>
       <img src={player.image} alt={player.name} />
-      <Players>{player.name} {player.wicket && <WicketGone>{player.wicket}</WicketGone>}</Players>
+      <Players>{player.name} {player.score && <FoursSixes>6s = {player.six || 0} 4s = {player.four || 0} 0s = {player.dot || 0}</FoursSixes>} {player.wicket && <WicketGone>{player.wicket}</WicketGone>}</Players>
       <Score>{player.score} {player.balls && <span>({player.balls})</span>}</Score>
     </PlayerWrapper>
   );

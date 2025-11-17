@@ -17,7 +17,10 @@ export function setCrickScore(state, action, team) {
       ...updatedPlayer[batsManIndx],
       score: (updatedPlayer[batsManIndx].score || 0) + score,
       balls: (updatedPlayer[batsManIndx].balls || 0) + ball,
-      wicket: wicket || null
+      wicket: wicket || null,
+      six: score === 6 ? (updatedPlayer[batsManIndx].six || 0)  + 1 : (updatedPlayer[batsManIndx].six),
+      four: score === 4 ? (updatedPlayer[batsManIndx].four || 0)  + 1 : (updatedPlayer[batsManIndx].four),
+      dot: score === 0 ? (updatedPlayer[batsManIndx].dot || 0)  + 1 : (updatedPlayer[batsManIndx].dot)
     };
     console.log(updatedPlayer)
     return updatedPlayer;
@@ -106,7 +109,7 @@ export function decideBattingBowlingTeams(state) {
 export function endFirstInning(state, battingKey, ballingTeam, dispatch) {
   if (
     state[battingKey].balls < state.overs * 6 &&
-    state[battingKey].wicket < 11
+    state[battingKey].wicket < 10
   ) {
     console.log("Ekumcheck Its Inning 1 Continue");
   } else {
@@ -126,7 +129,7 @@ export function endSecondInning(state, battingKey, ballingKey, dispatch) {
   if (state[battingKey].score < state.target) {
     if (
       state[battingKey].balls < state.overs * 6 &&
-      state[battingKey].wicket < 11
+      state[battingKey].wicket < 10
     ) {
       console.log("All Good 2nd inning can conitinue");
     } else {
