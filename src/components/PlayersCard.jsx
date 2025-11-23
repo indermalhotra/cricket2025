@@ -4,7 +4,7 @@ const PlayerWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   gap: 2rem;
-  margin: 1rem;
+  margin: 0.3rem;
   align-items: center;
 
   &:hover img{

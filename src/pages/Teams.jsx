@@ -224,7 +224,7 @@ function Teams() {
     return (
       <>
         {console.log(state[ballingKey].players)}
-        {state.changeBowler && (
+        {/* {state.changeBowler && (
           <WinnerOverlay>
             <BowlerInner $bgColor={state[ballingKey].color}>
               <BowlerHeading>Select Bowler</BowlerHeading>
@@ -235,7 +235,7 @@ function Teams() {
               </PlayerWrapper>
             </BowlerInner>
           </WinnerOverlay>
-        )}
+        )} */}
         {state.winner && (
           <WinnerOverlay>
             <WinnerInner>
