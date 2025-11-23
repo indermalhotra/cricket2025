@@ -15,15 +15,15 @@ playersIndia = [
 
 playersAustralia = [
     {name:"Tim David", image:"https://www.wisden.com/static-assets/images/players/67402.png?v=23.77", id:"1aus"},
-    {name:"Player 2", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"2aus"},
-    {name:"Player 3", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"3aus"},
-    {name:"Player 4", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"4aus"},
-    {name:"Player 5", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"5aus"},
-    {name:"Player 6", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"6aus"},
-    {name:"Player 7", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"7aus"},
-    {name:"Player 8", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"8aus"},
-    {name:"Player 9", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"9aus"},
-    {name:"Player 10", image:"https://thumbs.dreamstime.com/b/image-not-available-icon-vector-set-white-background-eps-330821927.jpg", id:"10aus"},
+    {name:"Alex Carey", image:"https://admin.thecricketer.com/weblab/Sites/96c8b790-b593-bfda-0ba4-ecd3a9fdefc2/resources/images/site/careyheadshot-min.jpg", id:"2aus"},
+    {name:"Josh Inglis", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxynEhQZokl_rPwcfo5gt1G6bj1WNfie2UvbXoNgb73wOCNhISEor00XdnbuxPOcrB-_o&usqp=CAU", id:"3aus"},
+    {name:"Travis Head", image:"https://d13ir53smqqeyp.cloudfront.net/fc-player-images/1443.png", id:"4aus"},
+    {name:"Mitchell Marsh", image:"https://www.asksportsinfo.com/wp-content/uploads/2024/10/Mitchell-Marsh-Australia-Cricketer.webp", id:"5aus"},
+    {name:"Cameron Green", image:"https://i.pinimg.com/474x/f9/70/f9/f970f909231c8e62e50e1318c13990cf.jpg", id:"6aus"},
+    {name:"Xavier Bartlett", image:"https://images.mykhel.com/webp/images/cricket/players/0/10740.jpg?v=5", id:"7aus"},
+    {name:"Ben Dwarshuis", image:"https://static-files.cricket-australia.pulselive.com/headshots/288/770-camedia.png", id:"8aus"},
+    {name:"Adam Zampa", image:"https://i.pinimg.com/474x/90/a7/db/90a7db224b2d114dc6522bc185128ce6.jpg", id:"9aus"},
+    {name:"Mitchell Starc", image:"https://crickpro.com/_next/image?url=https%3A%2Fcdn.crickpro.net%2Fstatic%2F24736%2Fuser%2FqsXjL0tQ5y2zsgFe0YagooIs2HnB0nlQt0BG3ncm.jpg&w=384&q=75", id:"10aus"},
 ]
 
 const playersTemp = [

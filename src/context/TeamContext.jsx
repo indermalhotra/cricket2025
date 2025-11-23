@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import { dataCountries, dataStadiums } from "../data/cricData";
-import { setCrickScore, setInningsEnd } from "../utils/functions";
+import { setBowler, setCrickScore, setDecide, setInningsEnd } from "../utils/functions";
 
 const TeamContext = createContext();
 const initialState = {
@@ -14,7 +14,8 @@ const initialState = {
   batting: null,
   overs: null,
   winner:null,
-  target:null
+  target:null,
+  changeBowler:false,
 };
 
 function reducer(state, action) {
@@ -24,28 +25,29 @@ function reducer(state, action) {
         ...state,
         team1: action.payload,
       };
+
     case "SET_TEAM2":
       return {
         ...state,
         team2: action.payload,
       };
+
     case `SET_STADIUM`:
       return {
         ...state,
         stadium: action.payload,
       };
+
     case `SET_TOSS`:
       return {
         ...state,
         toss: action.payload,
         inning: 1
       };
+
     case `SET_DECIDE`:
-      return {
-        ...state,
-        batting:
-          action.payload === 0 ? state["team1"].name : state["team2"].name,
-      };
+      return setDecide(state, action);
+
     case `SET_OVERS`:
       return {
         ...state,
@@ -62,7 +64,13 @@ function reducer(state, action) {
       return setInningsEnd(state, action);
 
     case `SET_WINNER`:
-      return {...state, winner:action.payload}
+      return {...state, winner:action.payload};
+
+    case `SET_BOWLER`:
+      return setBowler(state, action)
+
+    case `RESET`:
+      return initialState
       
     default:
       return state;

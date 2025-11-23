@@ -11,6 +11,7 @@ import {
   endSecondInning,
   randomScoreArr,
 } from "../utils/functions";
+import SelectBowler from "../components/SelectBowler";
 
 const TeamContainer = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ const WinnerOverlay = styled.div`
   left: 0;
   top: 0;
   z-index: 999;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,6 +88,37 @@ const WinnerInner = styled.div`
   }
 `;
 
+const BowlerInner = styled.div`
+  width: 90rem;
+  height: 30rem;
+  background-color: ${props=>props.$bgColor};
+  border: 2px solid var(--color-secondary-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: auto;
+  padding: 2rem;
+`;
+
+const PlayerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  text-align: center;
+  gap: 2rem;
+
+  img {
+    height: 18rem;
+    width: 18rem;
+    border: 2px solid #000;
+  }
+`;
+
+const BowlerHeading = styled.h2`
+  font-size: var(--mediumFont);
+  color: var(--color-secondary-500);
+`;
+
 const WinnerName = styled.div`
   font-size: var(--mediumFont);
   margin-top: 2rem;
@@ -115,18 +147,19 @@ function Teams() {
   }
 
   function selected(call) {
-    console.log(call);
+    console.log(call, "indertest");
     dispatch({ type: "SET_DECIDE", payload: call });
   }
 
-  const [battingKey, ballingTeam, ballingKey] = decideBattingBowlingTeams(state);
-  
+  const [battingKey, ballingTeam, ballingKey] =
+    decideBattingBowlingTeams(state);
+
   let diff;
-  if(state[battingKey].wicket < 4){
+  if (state[battingKey].wicket < 4) {
     diff = 1;
-  }else if(state[battingKey].wicket > 4 || state[battingKey].wicket < 8){
+  } else if (state[battingKey].wicket > 4 || state[battingKey].wicket < 8) {
     diff = 2;
-  }else{
+  } else {
     diff = 3;
   }
   const outcomes = randomScoreArr(diff);
@@ -148,8 +181,6 @@ function Teams() {
     }
   }
 
-  
-    
   useEffect(() => {
     if (state.winner) return;
 
@@ -192,23 +223,45 @@ function Teams() {
   if (state.stadium) {
     return (
       <>
+        {console.log(state[ballingKey].players)}
+        {state.changeBowler && (
+          <WinnerOverlay>
+            <BowlerInner $bgColor={state[ballingKey].color}>
+              <BowlerHeading>Select Bowler</BowlerHeading>
+              <PlayerWrapper>
+                {state[ballingKey].players.map((player,indx) => (
+                  <SelectBowler player={player} key={indx} plNo={indx}/>
+                ))}
+              </PlayerWrapper>
+            </BowlerInner>
+          </WinnerOverlay>
+        )}
         {state.winner && (
           <WinnerOverlay>
             <WinnerInner>
               <img src={state.winner.flag} alt={state.winner.name} />
               <WinnerName>Champion is: {state.winner.name}</WinnerName>
+              <Button
+                size="small"
+                onClick={() => {
+                  dispatch({ type: "RESET" });
+                  navigate("/", { replace: true });
+                }}
+              >
+                Play Again
+              </Button>
             </WinnerInner>
           </WinnerOverlay>
         )}
         <TeamContainer>
           <TeamBox $color={state.team1.color}>
             {state.team1.players.map((player) => (
-              <PlayersCard player={player} key={player.id}/>
+              <PlayersCard player={player} key={player.id} />
             ))}
           </TeamBox>
           <TeamBox $color={state.team2.color}>
             {state.team2.players.map((player) => (
-              <PlayersCard player={player} key={player.id}/>
+              <PlayersCard player={player} key={player.id} />
             ))}
           </TeamBox>
         </TeamContainer>
