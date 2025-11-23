@@ -5,6 +5,7 @@ import TeamContext from "../context/TeamContext";
 const SinglePlayer = styled.div`
     span, img{
         display: block;
+        
     }
 `;
 

@@ -40,9 +40,9 @@ function SelectOvers() {
 
     return (
         <OverContainer>
-            <DisplayOver onClick={()=>selOvers(1)}>1 Overs</DisplayOver>
             <DisplayOver onClick={()=>selOvers(10)}>10 Overs</DisplayOver>
             <DisplayOver onClick={()=>selOvers(15)}>15 Overs</DisplayOver>
+            <DisplayOver onClick={()=>selOvers(20)}>20 Overs</DisplayOver>
             <DisplayOver onClick={()=>selOvers(50)}>50 Overs</DisplayOver>
         </OverContainer>
     )
